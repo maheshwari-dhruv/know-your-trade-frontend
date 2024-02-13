@@ -1,5 +1,3 @@
-import React from "react";
-
 export const SubscribEmailSection = () => {
   return (
     <section className="border-red-600 border py-5 subscribe-email flex flex-col gap-4">

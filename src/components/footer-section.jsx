@@ -1,5 +1,3 @@
-import React from "react";
-
 export const FooterSection = () => {
   return (
     <footer className="border-red-600 border py-5 footer-section flex flex-col gap-4 items-center align-middle">

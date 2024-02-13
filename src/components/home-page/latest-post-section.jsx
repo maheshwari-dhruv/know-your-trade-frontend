@@ -1,5 +1,3 @@
-import React from "react";
-
 export const LatestPostSection = () => {
   return (
     <section className="border-red-600 border py-5 latest-post h-96 overflow-y-auto">

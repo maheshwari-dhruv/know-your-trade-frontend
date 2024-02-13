@@ -1,5 +1,3 @@
-import React from "react";
-
 export const HeaderSection = () => {
   return (
     <header className="border-red-600 border py-5 header-section flex items-center justify-between gap-4">
