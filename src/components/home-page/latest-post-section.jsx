@@ -1,6 +1,6 @@
 export const LatestPostSection = () => {
   return (
-    <section className="border-red-600 border py-5 latest-post h-96 overflow-y-auto">
+    <section className="py-5 latest-post h-96 overflow-y-auto">
       <div className="flex w-full gap-4 h-full">
         <div className="border-green-600 border w-3/5 h-full">Blog 1</div>
         <div className="flex flex-col gap-4 w-2/5">

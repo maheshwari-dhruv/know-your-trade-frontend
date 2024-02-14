@@ -1,6 +1,6 @@
 export const FooterSection = () => {
   return (
-    <footer className="border-red-600 border py-5 footer-section flex flex-col gap-4 items-center align-middle">
+    <footer className="py-5 footer-section flex flex-col gap-4 items-center align-middle">
       <div className="blog-heading border-green-600 border w-full text-center">
         <span>Know Your Trade</span>
       </div>
