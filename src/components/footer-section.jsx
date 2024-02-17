@@ -16,9 +16,9 @@ const LINKS = [
 export const FooterSection = () => {
   return (
     <footer className="w-full">
-      <div className="mx-auto w-full p-8 flex flex-col gap-8">
+      <div className="flex flex-col w-full gap-8 py-8 mx-auto">
         <div className="flex justify-between gap-8">
-          <div className="flex flex-col gap-4 items-start text-left w-3/5">
+          <div className="flex flex-col items-start w-3/5 gap-4 text-left">
             <div>
               <a
                 href="/"
@@ -83,13 +83,13 @@ export const FooterSection = () => {
               </a>
             </div>
           </div>
-          <div className="flex gap-8 justify-between w-2/5">
+          <div className="flex justify-between w-2/5 gap-8">
             {LINKS.map(({ title, items }) => (
               <div key={title}>
                 <h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase">
                   {title}
                 </h2>
-                <ul className="text-gray-500 dark:text-gray-400 font-medium">
+                <ul className="font-medium text-gray-500 dark:text-gray-400">
                   {items.map((link) => (
                     <li className="mb-4" key={link}>
                       <a href="#" className="hover:underline">
@@ -102,9 +102,9 @@ export const FooterSection = () => {
             ))}
           </div>
         </div>
-        <hr className="border-gray-700 border" />
+        <hr className="border border-gray-700" />
         <div className="text-center">
-          <span className="text-gray-500 text-sm">
+          <span className="text-sm text-gray-500">
             KnowYourTrade | Made with Passion by Dhruv Maheshwari
           </span>
         </div>

@@ -1,5 +1,21 @@
-export const LatestPostSection = () => {
-  return (
+import { useEffect, useState } from "react";
+import PropTypes from "prop-types";
+
+export const LatestPostSection = ({ posts }) => {
+  const [firstPostData, setFirstPostData] = useState({});
+  const [restOfPostsData, setRestOfPostsData] = useState([]);
+
+  useEffect(() => {
+    const firstPost = posts[0];
+    const restOfPosts = posts.slice(1, 5);
+
+    setFirstPostData(firstPost);
+    setRestOfPostsData(restOfPosts);
+  }, [posts]);
+
+  return firstPostData == undefined ? (
+    <p>Loading</p>
+  ) : (
     <section className="mt-4">
       <div className="container">
         <div className="flex flex-col gap-8 lg:flex-row">
@@ -10,49 +26,37 @@ export const LatestPostSection = () => {
               alt="main-post"
             />
             <div className="flex flex-col gap-3">
-              <p className="text-sm uppercase">Want to know</p>
+              <p className="text-sm uppercase">{firstPostData.category}</p>
               <h1 className="max-w-lg text-2xl font-semibold leading-tight">
-                What do you want to know about UI
+                {firstPostData.postTitle}
               </h1>
+              <p className="text-sm uppercase">{firstPostData.createdAt}</p>
             </div>
           </div>
           <div className="lg:w-1/4">
-            <div className="flex flex-col gap-3">
-              <h3 className="capitalize">Design instument</h3>
-              <a href="/" className="block font-medium">
-                How to raise $100k+ by using blox ui kit on your design
-              </a>
-            </div>
+            {restOfPostsData.map((post) => (
+              <div key={post.postId}>
+                <div className="flex flex-col gap-3">
+                  <h3 className="capitalize">{post.category}</h3>
+                  <a
+                    href={`/post/${post.postTitle}`}
+                    className="block font-medium"
+                  >
+                    {post.postTitle}
+                  </a>
+                  <p className="capitalize">{post.createdAt}</p>
+                </div>
 
-            <hr className="my-4 border-black" />
-
-            <div className="flex flex-col gap-3">
-              <h3 className="capitalize">UI Resource</h3>
-              <a href="/" className="block font-medium">
-                Should you creat UI Product by using Blox?
-              </a>
-            </div>
-
-            <hr className="my-4 border-black" />
-
-            <div className="flex flex-col gap-3">
-              <h3 className="capitalize">Premium Collection</h3>
-              <a href="/" className="block font-medium">
-                Top 10 Blocks you can get on Blox collection.
-              </a>
-            </div>
-
-            <hr className="my-4 border-black" />
-
-            <div className="flex flex-col gap-3">
-              <h3 className="capitalize">Premium kits</h3>
-              <a href="/" className="block font-medium">
-                Top 10 Ui kit you can get on Bloxs collection.
-              </a>
-            </div>
+                <hr className="my-4 border-black" />
+              </div>
+            ))}
           </div>
         </div>
       </div>
     </section>
   );
+};
+
+LatestPostSection.propTypes = {
+  posts: PropTypes.array,
 };

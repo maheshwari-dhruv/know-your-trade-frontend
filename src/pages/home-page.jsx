@@ -1,19 +1,31 @@
-import { FooterSection } from "../components/footer-section";
-import { NavbarSection } from "../components/navbar-section";
+import { useEffect, useState } from "react";
 import { LatestPostSection } from "../components/home-page/latest-post-section";
 import { MorePostSection } from "../components/home-page/more-post-section";
 import { SubscribEmailSection } from "../components/home-page/subscribe-email";
+// import fetchData from "../api/api";
+import jsonData from "../assets/data/data.json";
+// import getLatestPostData from "../services/latest-post-service";
+// import getMorePostData from "../services/more-post-service";
+import sortPostData from "../utils/sort-json-data";
 
 export const Home = () => {
+  const [sortData, setSortData] = useState([]);
+
+  useEffect(() => {
+    const sortedData = sortPostData(jsonData);
+
+    setSortData(sortedData);
+  }, []);
+
+  if (!sortData) {
+    return <p>Loading...</p>;
+  }
+
   return (
-    <div className="w-full h-full px-5 py-5 bg-zinc-900 main">
-      <div className="flex flex-col w-full h-full gap-8 px-40 text-black bg-white border-2 rounded-md">
-        <NavbarSection />
-        <LatestPostSection />
-        <MorePostSection />
-        <SubscribEmailSection />
-        <FooterSection />
-      </div>
+    <div className="flex flex-col gap-8">
+      <LatestPostSection posts={sortData} />
+      <MorePostSection posts={sortData} />
+      <SubscribEmailSection />
     </div>
   );
 };
