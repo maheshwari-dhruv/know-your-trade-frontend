@@ -4,7 +4,7 @@ import { NavbarSection } from "./components/navbar-section";
 
 export const App = () => {
   return (
-    <main className="w-full h-full px-5 py-5 bg-zinc-900">
+    <main className="w-full px-5 py-5 bg-zinc-900">
       <div className="flex flex-col w-full h-full gap-8 px-40 text-black bg-white border-2 rounded-md">
         <NavbarSection />
         <Outlet />

@@ -2,10 +2,7 @@ import { useEffect, useState } from "react";
 import { LatestPostSection } from "../components/home-page/latest-post-section";
 import { MorePostSection } from "../components/home-page/more-post-section";
 import { SubscribEmailSection } from "../components/home-page/subscribe-email";
-// import fetchData from "../api/api";
 import jsonData from "../assets/data/data.json";
-// import getLatestPostData from "../services/latest-post-service";
-// import getMorePostData from "../services/more-post-service";
 import sortPostData from "../utils/sort-json-data";
 
 export const Home = () => {
