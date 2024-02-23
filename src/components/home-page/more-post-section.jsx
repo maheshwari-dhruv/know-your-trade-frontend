@@ -7,6 +7,7 @@ export const MorePostSection = ({ posts }) => {
 
   useEffect(() => {
     const moreData = posts.slice(5, 11);
+    console.log(moreData);
     setMorePostData(moreData);
   }, [posts]);
 
