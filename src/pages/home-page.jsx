@@ -2,26 +2,55 @@ import { useEffect, useState } from "react";
 import { LatestPostSection } from "../components/home-page/latest-post-section";
 import { MorePostSection } from "../components/home-page/more-post-section";
 import { SubscribEmailSection } from "../components/home-page/subscribe-email";
-import jsonData from "../assets/data/data.json";
-import sortPostData from "../utils/sort-json-data";
 
 export const Home = () => {
-  const [sortData, setSortData] = useState([]);
+  const [posts, setPosts] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    const sortedData = sortPostData(jsonData);
+    const fetchData = async () => {
+      setIsLoading(true);
+      setError(null);
 
-    setSortData(sortedData);
+      try {
+        const response = await fetch("http://localhost:8080/api/v1/post/all");
+
+        if (!response.ok) {
+          throw new Error(`Network response was not ok (${response.status})`);
+        }
+
+        const data = await response.json();
+
+        if (!data.success) {
+          throw new Error(
+            `API response indicated failure (resultCode: ${data.resultCode}, resultStatus: ${data.resultStatus}, resultMsg: ${data.resultMsg})`
+          );
+        }
+
+        setPosts(data.data.postDTO);
+      } catch (error) {
+        setError(error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchData();
   }, []);
 
-  if (!sortData) {
+  if (isLoading) {
     return <p>Loading...</p>;
+  }
+
+  if (error) {
+    return <p>Error: {error.message}</p>;
   }
 
   return (
     <div className="flex flex-col gap-8">
-      <LatestPostSection posts={sortData} />
-      <MorePostSection posts={sortData} />
+      <LatestPostSection posts={posts} />
+      <MorePostSection posts={posts} />
       <SubscribEmailSection />
     </div>
   );
