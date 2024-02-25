@@ -5,39 +5,38 @@ import { SubscribEmailSection } from "../components/home-page/subscribe-email";
 
 export const Home = () => {
   const [posts, setPosts] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    const fetchData = async () => {
-      setIsLoading(true);
-      setError(null);
-
-      try {
-        const response = await fetch("http://localhost:8080/api/v1/post/all");
-
-        if (!response.ok) {
-          throw new Error(`Network response was not ok (${response.status})`);
-        }
-
-        const data = await response.json();
-
-        if (!data.success) {
-          throw new Error(
-            `API response indicated failure (resultCode: ${data.resultCode}, resultStatus: ${data.resultStatus}, resultMsg: ${data.resultMsg})`
-          );
-        }
-
-        setPosts(data.data.postDTO);
-      } catch (error) {
-        setError(error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
     fetchData();
   }, []);
+
+  const fetchData = async () => {
+    try {
+      const response = await fetch("http://localhost:8080/api/v1/post/all");
+
+      if (!response.ok) {
+        throw new Error(`Network response was not ok (${response.status})`);
+      }
+
+      const data = await response.json();
+
+      if (!data.success) {
+        throw new Error(
+          `API response indicated failure (resultCode: ${data.resultCode}, resultStatus: ${data.resultStatus}, resultMsg: ${data.resultMsg})`
+        );
+      }
+
+      setPosts(data.data.postDTO || []);
+    } catch (error) {
+      setError(error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  console.log(posts.length);
 
   if (isLoading) {
     return <p>Loading...</p>;

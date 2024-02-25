@@ -26,7 +26,10 @@ export const MorePostSection = ({ posts }) => {
           {morePostData.map((post) => (
             <Link
               key={post.postId}
-              to={`/post/${createSlug(post.postTitle)}`}
+              to={`/post/${createSlug(
+                post.postTitle === undefined ? "" : post.postTitle
+              )}`}
+              // to={`/post/${post.postTitle}`}
               state={{ postId: post.postId }}
             >
               <div className="lg:flex">

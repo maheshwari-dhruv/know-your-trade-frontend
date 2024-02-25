@@ -23,7 +23,12 @@ export const LatestPostSection = ({ posts }) => {
         <div className="flex flex-col gap-8 lg:flex-row">
           <div className="flex flex-col gap-4 lg:w-3/4">
             <Link
-              to={`/post/${createSlug(firstPostData.postTitle)}`}
+              to={`/post/${createSlug(
+                firstPostData.postTitle === undefined
+                  ? ""
+                  : firstPostData.postTitle
+              )}`}
+              // to={`/post/${firstPostData.postTitle}`}
               state={{ postId: firstPostData.postId }}
             >
               <img
@@ -45,7 +50,10 @@ export const LatestPostSection = ({ posts }) => {
               <div key={post.postId}>
                 <div className="flex flex-col gap-3">
                   <Link
-                    to={`/post/${createSlug(post.postTitle)}`}
+                    to={`/post/${createSlug(
+                      post.postTitle === undefined ? "" : post.postTitle
+                    )}`}
+                    // to={`/post/${post.postTitle}`}
                     state={{ postId: post.postId }}
                   >
                     <h3 className="capitalize">{post.category}</h3>
