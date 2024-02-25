@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
+import createSlug from "../../utils/title-to-slug";
 
 export const LatestPostSection = ({ posts }) => {
   const [firstPostData, setFirstPostData] = useState({});
@@ -22,7 +23,7 @@ export const LatestPostSection = ({ posts }) => {
         <div className="flex flex-col gap-8 lg:flex-row">
           <div className="flex flex-col gap-4 lg:w-3/4">
             <Link
-              to={`/post/${firstPostData.postTitle}`}
+              to={`/post/${createSlug(firstPostData.postTitle)}`}
               state={{ postId: firstPostData.postId }}
             >
               <img
@@ -44,7 +45,7 @@ export const LatestPostSection = ({ posts }) => {
               <div key={post.postId}>
                 <div className="flex flex-col gap-3">
                   <Link
-                    to={`/post/${post.postTitle}`}
+                    to={`/post/${createSlug(post.postTitle)}`}
                     state={{ postId: post.postId }}
                   >
                     <h3 className="capitalize">{post.category}</h3>

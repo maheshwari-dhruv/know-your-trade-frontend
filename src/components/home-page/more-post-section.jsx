@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
+import createSlug from "../../utils/title-to-slug";
 
 export const MorePostSection = ({ posts }) => {
   const [morePostData, setMorePostData] = useState([]);
@@ -25,7 +26,7 @@ export const MorePostSection = ({ posts }) => {
           {morePostData.map((post) => (
             <Link
               key={post.postId}
-              to={`/post/${post.postTitle}`}
+              to={`/post/${createSlug(post.postTitle)}`}
               state={{ postId: post.postId }}
             >
               <div className="lg:flex">

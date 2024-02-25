@@ -1,11 +1,24 @@
-const fetchData = async () => {
+import axios from "axios";
+
+async function fetchData(url) {
   try {
-    const response = await fetch("../assets/data/data.json");
-    return await response.json();
+    const response = await axios.get(url);
+
+    if (!response.ok) {
+      throw new Error(`Network response was not ok (${response.status})`);
+    }
+
+    if (!response.success) {
+      throw new Error(
+        `API response indicated failure (resultCode: ${response.data.resultCode}, resultStatus: ${response.data.resultStatus}, resultMsg: ${response.data.resultMsg})`
+      );
+    }
+
+    return response.data.postDTO;
   } catch (error) {
-    console.error("Error fetching data:", error);
-    throw error; // Rethrow the error to handle it in the components
+    console.error(error);
+    throw error;
   }
-};
+}
 
 export default fetchData;
