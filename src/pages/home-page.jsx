@@ -1,55 +1,27 @@
-import { useEffect, useState } from "react";
 import { LatestPostSection } from "../components/home-page/latest-post-section";
 import { MorePostSection } from "../components/home-page/more-post-section";
 import { SubscribEmailSection } from "../components/home-page/subscribe-email";
+import { useLoaderData, useNavigation } from "react-router-dom";
 
 export const Home = () => {
-  const [posts, setPosts] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const result = useLoaderData();
+  const navigation = useNavigation();
 
-  useEffect(() => {
-    fetchData();
-  }, []);
+  console.log("result", result);
+  console.log("navigation", navigation);
 
-  const fetchData = async () => {
-    try {
-      const response = await fetch("http://localhost:8080/api/v1/post/all");
-
-      if (!response.ok) {
-        throw new Error(`Network response was not ok (${response.status})`);
-      }
-
-      const data = await response.json();
-
-      if (!data.success) {
-        throw new Error(
-          `API response indicated failure (resultCode: ${data.resultCode}, resultStatus: ${data.resultStatus}, resultMsg: ${data.resultMsg})`
-        );
-      }
-
-      setPosts(data.data.postDTO || []);
-    } catch (error) {
-      setError(error);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  console.log(posts.length);
-
-  if (isLoading) {
+  if (navigation.state === "loading") {
     return <p>Loading...</p>;
   }
 
-  if (error) {
-    return <p>Error: {error.message}</p>;
+  if (navigation.state === "error") {
+    return <p>Error: {navigation.text}</p>;
   }
 
   return (
     <div className="flex flex-col gap-8">
-      <LatestPostSection posts={posts} />
-      <MorePostSection posts={posts} />
+      <LatestPostSection posts={result} />
+      <MorePostSection posts={result} />
       <SubscribEmailSection />
     </div>
   );
