@@ -1,5 +1,6 @@
 import { App } from "../App";
 import { homePageLoader } from "../loaders/home-page-loader";
+import { postPageLoader } from "../loaders/post-page-loader";
 import { About } from "../pages/about-page";
 import { ErrorPage } from "../pages/error/error-page";
 import { Home } from "../pages/home-page";
@@ -15,7 +16,11 @@ export const router = createBrowserRouter(
     <Route path="/" element={<App />} errorElement={<ErrorPage />}>
       <Route index element={<Home />} loader={homePageLoader} />
       <Route path="about" element={<About />} />
-      <Route path="post/:postTitle" element={<PostPage />} />
+      <Route
+        path="post/:postTitle"
+        element={<PostPage />}
+        loader={postPageLoader}
+      />
     </Route>
   )
 );
