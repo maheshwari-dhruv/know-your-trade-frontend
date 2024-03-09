@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
-import { Link, Navigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import createSlug from "../../utils/title-to-slug";
 
 export const LatestPostSection = ({ posts }) => {
@@ -15,13 +15,6 @@ export const LatestPostSection = ({ posts }) => {
     setRestOfPostsData(restOfPosts);
   }, [posts]);
 
-  const handleLinkClick = () => {
-    const postId = firstPostData.postId;
-    const slug = createSlug(firstPostData.postTitle);
-
-    Navigate(`/post/${slug}`, { postId });
-  };
-
   return firstPostData == undefined ? (
     <p>Loading</p>
   ) : (
@@ -29,20 +22,27 @@ export const LatestPostSection = ({ posts }) => {
       <div className="container">
         <div className="flex flex-col gap-8 lg:flex-row">
           <div className="flex flex-col gap-4 lg:w-3/4">
-            <Link onClick={handleLinkClick}>
-              <img
-                className="object-cover object-center w-full h-80 xl:h-[28rem]"
-                src="https://images.unsplash.com/photo-1624996379697-f01d168b1a52?ixlib=rb-1.2.1ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8auto=format&fit=crop&w=1470&q=80"
-                alt="main-post"
-              />
-              <div className="flex flex-col gap-3">
-                <p className="text-sm uppercase">{firstPostData.category}</p>
-                <h1 className="max-w-lg text-2xl font-semibold leading-tight">
-                  {firstPostData.postTitle}
-                </h1>
-                <p className="text-sm uppercase">{firstPostData.createdAt}</p>
-              </div>
-            </Link>
+            {/* <Link
+              to={`/post/${createSlug(
+                firstPostData.postTitle === undefined
+                  ? ""
+                  : firstPostData.postTitle
+              )}`}
+              state={{ postId: firstPostData.postId }}
+            > */}
+            <img
+              className="object-cover object-center w-full h-80 xl:h-[28rem]"
+              src="https://images.unsplash.com/photo-1624996379697-f01d168b1a52?ixlib=rb-1.2.1ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8auto=format&fit=crop&w=1470&q=80"
+              alt="main-post"
+            />
+            <div className="flex flex-col gap-3">
+              <p className="text-sm uppercase">{firstPostData.category}</p>
+              <h1 className="max-w-lg text-2xl font-semibold leading-tight">
+                {firstPostData.postTitle}
+              </h1>
+              <p className="text-sm uppercase">{firstPostData.createdAt}</p>
+            </div>
+            {/* </Link> */}
           </div>
           <div className="lg:w-1/4">
             {restOfPostsData.map((post) => (
@@ -52,7 +52,6 @@ export const LatestPostSection = ({ posts }) => {
                     to={`/post/${createSlug(
                       post.postTitle === undefined ? "" : post.postTitle
                     )}`}
-                    // to={`/post/${post.postTitle}`}
                     state={{ postId: post.postId }}
                   >
                     <h3 className="capitalize">{post.category}</h3>

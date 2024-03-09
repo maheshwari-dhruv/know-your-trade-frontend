@@ -1,4 +1,5 @@
-import { LatestPostSection } from "../components/home-page/latest-post-section";
+import TopBlogSection from "../components/header/top-blog-section";
+// import { LatestPostSection } from "../components/home-page/latest-post-section";
 import { MorePostSection } from "../components/home-page/more-post-section";
 import { SubscribEmailSection } from "../components/home-page/subscribe-email";
 import { useLoaderData, useNavigation } from "react-router-dom";
@@ -17,7 +18,8 @@ export const Home = () => {
 
   return (
     <div className="flex flex-col gap-8">
-      <LatestPostSection posts={result} />
+      <TopBlogSection />
+      {/* <LatestPostSection posts={result} /> */}
       <MorePostSection posts={result} />
       <SubscribEmailSection />
     </div>
