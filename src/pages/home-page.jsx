@@ -8,6 +8,8 @@ export const Home = () => {
   const result = useLoaderData();
   const navigation = useNavigation();
 
+  console.log(result);
+
   if (navigation.state === "loading") {
     return <p>Loading...</p>;
   }
