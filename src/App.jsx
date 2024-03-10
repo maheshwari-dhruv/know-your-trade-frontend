@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom";
 import Navbar from "./components/navbar";
-// import { FooterSection } from "./components/footer-section";
+import { FooterSection } from "./components/footer-section";
 // import { NavbarSection } from "./components/navbar-section";
 
 export const App = () => {
@@ -12,9 +12,10 @@ export const App = () => {
     //     <FooterSection />
     //   </div>
     // </main>
-    <main className="main">
+    <main className="bg-white main">
       <Navbar />
       <Outlet />
+      <FooterSection />
     </main>
   );
 };
