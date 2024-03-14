@@ -1,6 +1,6 @@
 const RecentBlogSection = () => {
   return (
-    <div className="px-28">
+    <section className="px-28">
       <div className="py-8">
         <span className="px-4 font-sans text-4xl font-bold text-black">
           Recent Blogs
@@ -104,7 +104,7 @@ const RecentBlogSection = () => {
           </p>
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 
